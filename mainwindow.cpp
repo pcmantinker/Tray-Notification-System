@@ -1,12 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "traynotificationwidget.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    tnm = new TrayNotificationManager(this);
 }
 
 MainWindow::~MainWindow()
@@ -17,8 +17,5 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionShow_Notification_Widget_triggered()
 {
     TrayNotificationWidget* trayNotification = new TrayNotificationWidget();
-    trayNotification->show();
-    this->setFocus(Qt::ActiveWindowFocusReason);
-    this->activateWindow();
-    this->raise();
+    tnm->append(trayNotification);
 }

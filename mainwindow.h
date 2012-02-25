@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QtGui>
+#include "traynotificationmanager.h"
 
 namespace Ui {
 class MainWindow;
@@ -21,6 +22,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    TrayNotificationManager *tnm;
 };
 
 #endif // MAINWINDOW_H
