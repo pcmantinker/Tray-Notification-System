@@ -3,10 +3,7 @@
 TrayNotificationWidget::TrayNotificationWidget(QPixmap pixmapIcon, QString headerText, QString messageText)
 {
     setWindowFlags(
-                Qt::Dialog |
-                Qt::Tool |
                 Qt::FramelessWindowHint |
-                Qt::WindowSystemMenuHint |
                 Qt::WindowStaysOnTopHint
                 );
 
