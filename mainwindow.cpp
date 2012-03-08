@@ -18,6 +18,6 @@ void MainWindow::on_actionShow_Notification_Widget_triggered()
 {
     QIcon *icon = new QIcon(":/icons/info.png");
     QPixmap pixmap = icon->pixmap(64,64);
-    TrayNotificationWidget* trayNotification = new TrayNotificationWidget(pixmap, "Test message", "Here is some information");
+    TrayNotificationWidget* trayNotification = new TrayNotificationWidget(pixmap, "Test message", "Here is some information. Testing a ton of information to see if it wraps correctly.");
     tnm->append(trayNotification);
 }
