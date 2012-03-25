@@ -20,3 +20,6 @@ HEADERS  += mainwindow.h \
     traynotificationmanager.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    resources.qrc

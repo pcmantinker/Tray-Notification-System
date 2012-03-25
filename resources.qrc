@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>online.png</file>
+    </qresource>
+</RCC>

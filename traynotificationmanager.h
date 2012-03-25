@@ -16,6 +16,8 @@ public:
     TrayNotificationManager(QWidget *parent);
     ~TrayNotificationManager();
     void append(TrayNotificationWidget *widget);
+    void clear();
+    void setMaxTrayNotificationWidgets(int max);
 
 private:
     QWidget* m_parent;
@@ -28,6 +30,7 @@ private:
     int m_height;
     bool m_up;
     int m_onScreenCount;
+    int m_maxTrayNotificationWidgets;
 };
 
 #endif // TRAYNOTIFICATIONMANAGER_H

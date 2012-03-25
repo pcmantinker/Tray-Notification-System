@@ -8,7 +8,7 @@ class TrayNotificationWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit TrayNotificationWidget();
+    explicit TrayNotificationWidget(QPixmap pixmapIcon, QString headerText, QString messageText);
 
 private:
     QTimer* timeout;
