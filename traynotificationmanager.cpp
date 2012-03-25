@@ -7,8 +7,8 @@ TrayNotificationManager::TrayNotificationManager(QWidget *parent)
     QDesktopWidget* desktopWidget = QApplication::desktop();
     QRect clientRect = desktopWidget->availableGeometry();
     m_maxTrayNotificationWidgets = 4;
-    m_width = 350;
-    m_height = 130;
+    m_width = 280;
+    m_height = 100;
     m_onScreenCount = 0;
 #ifdef Q_WS_MACX
     m_startX = clientRect.width() - m_width;
@@ -54,9 +54,9 @@ void TrayNotificationManager::append(TrayNotificationWidget* widget)
         if(notificationWidgets->count() > 0)
         {
             if(m_up)
-                m_deltaY += -130;
+                m_deltaY += -100;
             else
-                m_deltaY += 130;
+                m_deltaY += 100;
         }
 
         if(notificationWidgets->count() == 0)

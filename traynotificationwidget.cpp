@@ -6,8 +6,8 @@ TrayNotificationWidget::TrayNotificationWidget(QPixmap pixmapIcon, QString heade
                 Qt::FramelessWindowHint |
                 Qt::WindowStaysOnTopHint
 #ifdef Q_WS_WIN
-                | Qt::Tool // only make a tool window if in Windows
-                | Qt::SubWindow // only make a SubWindow if in Windows
+//                | Qt::Tool // only make a tool window if in Windows
+//                | Qt::SubWindow // only make a SubWindow if in Windows
 #endif
                 );
 
@@ -18,7 +18,6 @@ TrayNotificationWidget::TrayNotificationWidget(QPixmap pixmapIcon, QString heade
     setAttribute(Qt::WA_TranslucentBackground, true);
     setAttribute(Qt::WA_ShowWithoutActivating, true);
 
-
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     // create a display widget for displaying child widgets
     QWidget* displayWidget = new QWidget;
@@ -27,18 +26,17 @@ TrayNotificationWidget::TrayNotificationWidget(QPixmap pixmapIcon, QString heade
 
     QLabel* icon = new QLabel;
     icon->setPixmap(pixmapIcon);
-    icon->setMaximumSize(64, 64);
-    icon->setMinimumSize(32, 32);
+    icon->setMaximumSize(32, 32);
     QLabel* header = new QLabel;
     header->setMaximumSize(225, 50);
     header->setWordWrap(true);
     header->setText(headerText);
-    header->setStyleSheet("QLabel { color: #ffffff; font-weight: bold; font-size: 14px; }");
+    header->setStyleSheet("QLabel { color: #ffffff; font-weight: bold; font-size: 12px; }");
     QLabel* message = new QLabel;
     message->setMaximumSize(225, 100);
     message->setWordWrap(true);
     message->setText(messageText);
-    message->setStyleSheet("QLabel { color: #ffffff; font-size: 12px; }");
+    message->setStyleSheet("QLabel { color: #ffffff; font-size: 10px; }");
     QHBoxLayout* displayMainLayout = new QHBoxLayout;
     displayMainLayout->addWidget(icon);
     QVBoxLayout* vl = new QVBoxLayout;
