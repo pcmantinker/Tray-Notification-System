@@ -4,10 +4,10 @@ TrayNotificationWidget::TrayNotificationWidget(QPixmap pixmapIcon, QString heade
 {
     setWindowFlags(
                 Qt::FramelessWindowHint |
-                Qt::WindowStaysOnTopHint |
-                Qt::SubWindow
+                Qt::WindowStaysOnTopHint
 #ifdef Q_WS_WIN
                 | Qt::Tool // only make a tool window if in Windows
+                | Qt::SubWindow // only make a SubWindow if in Windows
 #endif
                 );
 

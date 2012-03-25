@@ -23,7 +23,7 @@ void MainWindow::closeEvent(QCloseEvent *)
 
 void MainWindow::on_actionShow_Notification_Widget_triggered()
 {
-    QIcon* icon = new QIcon(":/online.png");
-    TrayNotificationWidget* trayNotification = new TrayNotificationWidget(icon->pixmap(32, 32), "Test", "This is a test message.");
+    QIcon* icon = new QIcon(":/icons/info.png");
+    TrayNotificationWidget* trayNotification = new TrayNotificationWidget(icon->pixmap(64, 64), "Test", "This is a test message.");
     tnm->append(trayNotification);
 }
