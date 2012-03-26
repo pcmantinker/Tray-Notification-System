@@ -13,14 +13,13 @@ public slots:
     void removeFirst(TrayNotificationWidget *widget);
 
 public:
-    TrayNotificationManager(QWidget *parent);
+    TrayNotificationManager();
     ~TrayNotificationManager();
     void append(TrayNotificationWidget *widget);
     void clear();
     void setMaxTrayNotificationWidgets(int max);
 
 private:
-    QWidget* m_parent;
     QList<TrayNotificationWidget*>* notificationWidgets;
     int m_deltaX;
     int m_deltaY;

@@ -1,28 +1,28 @@
 #include "traynotificationwidget.h"
 
-TrayNotificationWidget::TrayNotificationWidget(QPixmap pixmapIcon, QString headerText, QString messageText)
+TrayNotificationWidget::TrayNotificationWidget(QPixmap pixmapIcon, QString headerText, QString messageText) : QWidget(0)
 {
     setWindowFlags(
-                Qt::FramelessWindowHint |
-                Qt::WindowStaysOnTopHint
-#ifdef Q_WS_WIN
-//                | Qt::Tool // only make a tool window if in Windows
-//                | Qt::SubWindow // only make a SubWindow if in Windows
-#endif
-                );
-
-#ifdef Q_WS_X11
+        #ifdef Q_OS_MAC
+            Qt::SubWindow | // This type flag is the second point
+        #else
+            Qt::Tool |
+        #endif
+            Qt::FramelessWindowHint |
+            Qt::WindowSystemMenuHint |
+            Qt::WindowStaysOnTopHint
+        );
     setAttribute(Qt::WA_NoSystemBackground, true);
-#endif
     // set the parent widget's background to translucent
     setAttribute(Qt::WA_TranslucentBackground, true);
-    setAttribute(Qt::WA_ShowWithoutActivating, true);
+
+    //setAttribute(Qt::WA_ShowWithoutActivating, true);
 
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     // create a display widget for displaying child widgets
     QWidget* displayWidget = new QWidget;
     displayWidget->setGeometry(0, 0, this->width(), this->height());
-    displayWidget->setStyleSheet(".QWidget { background-color: rgba(0, 0, 0, 75%); border-width: 2px; border-style: solid; border-radius: 10px; border-color: #555555; }");
+    displayWidget->setStyleSheet(".QWidget { background-color: rgba(0, 0, 0, 75%); border-width: 1px; border-style: solid; border-radius: 10px; border-color: #555555; } .QWidget:hover { background-color: rgba(68, 68, 68, 75%); border-width: 2px; border-style: solid; border-radius: 10px; border-color: #ffffff; }");
 
     QLabel* icon = new QLabel;
     icon->setPixmap(pixmapIcon);
@@ -48,6 +48,7 @@ TrayNotificationWidget::TrayNotificationWidget(QPixmap pixmapIcon, QString heade
     QHBoxLayout* containerLayout = new QHBoxLayout;
     containerLayout->addWidget(displayWidget);
     setLayout(containerLayout);
+
     show();
 
     timeout = new QTimer(this);

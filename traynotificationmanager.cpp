@@ -1,8 +1,7 @@
 #include "traynotificationmanager.h"
 
-TrayNotificationManager::TrayNotificationManager(QWidget *parent)
+TrayNotificationManager::TrayNotificationManager()
 {
-    m_parent = parent;
     notificationWidgets = new QList<TrayNotificationWidget*>();
     QDesktopWidget* desktopWidget = QApplication::desktop();
     QRect clientRect = desktopWidget->availableGeometry();
@@ -23,8 +22,8 @@ TrayNotificationManager::TrayNotificationManager(QWidget *parent)
 #endif
 
 #ifdef Q_WS_WIN
-    m_startX = clientRect.width() - m_width - 5;
-    m_startY = clientRect.height() - m_height - 5;
+    m_startX = clientRect.width() - m_width;
+    m_startY = clientRect.height() - m_height;
     m_up = true;
 #endif
 
@@ -71,7 +70,6 @@ void TrayNotificationManager::append(TrayNotificationWidget* widget)
 
     widget->setGeometry(m_startX + m_deltaX, m_startY + m_deltaY, m_width, m_height);
     notificationWidgets->append(widget);
-    m_parent->activateWindow();
 }
 
 void TrayNotificationManager::removeFirst(TrayNotificationWidget *widget)
