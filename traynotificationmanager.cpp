@@ -9,6 +9,10 @@ TrayNotificationManager::TrayNotificationManager()
     m_width = 280;
     m_height = 100;
     m_onScreenCount = 0;
+
+    m_startX = clientRect.width() - m_width;
+    m_startY = clientRect.height() - m_height;
+
 #ifdef Q_WS_MACX
     m_startX = clientRect.width() - m_width;
     m_startY = 10;
@@ -52,7 +56,7 @@ void TrayNotificationManager::append(TrayNotificationWidget* widget)
 
         if(notificationWidgets->count() > 0)
         {
-            if(m_up)
+            if(!m_up)
                 m_deltaY += -100;
             else
                 m_deltaY += 100;

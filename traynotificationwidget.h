@@ -1,8 +1,7 @@
 #ifndef TRAYNOTIFICATIONWIDGET_H
 #define TRAYNOTIFICATIONWIDGET_H
 
-#include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 
 class TrayNotificationWidget : public QWidget
 {

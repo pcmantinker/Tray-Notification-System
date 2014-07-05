@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    tnm = new TrayNotificationManager(this);
+    tnm = new TrayNotificationManager();
     //tnm->setMaxTrayNotificationWidgets(3);
 }
 
@@ -24,6 +24,6 @@ void MainWindow::closeEvent(QCloseEvent *)
 void MainWindow::on_actionShow_Notification_Widget_triggered()
 {
     QIcon* icon = new QIcon(":/icons/info.png");
-    TrayNotificationWidget* trayNotification = new TrayNotificationWidget(icon->pixmap(64, 64), "Test", "This is a test message.");
+    TrayNotificationWidget* trayNotification = new TrayNotificationWidget(icon->pixmap(32, 32), "Test", "This is a test message.");
     tnm->append(trayNotification);
 }
