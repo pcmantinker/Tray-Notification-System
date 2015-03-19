@@ -2,12 +2,15 @@
 
 TrayNotificationManager::TrayNotificationManager()
 {
-    notificationWidgets = new QList<TrayNotificationWidget*>();
+	int zoom_app = qApp->primaryScreen()->logicalDotsPerInch() / 96.0;
+	zoom_app /= qApp->primaryScreen()->devicePixelRatio();
+
+	notificationWidgets = new QList<TrayNotificationWidget*>();
     QDesktopWidget* desktopWidget = QApplication::desktop();
     QRect clientRect = desktopWidget->availableGeometry();
     m_maxTrayNotificationWidgets = 4;
-    m_width = 280;
-    m_height = 100;
+	m_width = 280 * zoom_app;
+	m_height = 100* zoom_app;
     m_onScreenCount = 0;
 
     m_startX = clientRect.width() - m_width;
@@ -48,7 +51,10 @@ void TrayNotificationManager::setMaxTrayNotificationWidgets(int max)
 
 void TrayNotificationManager::append(TrayNotificationWidget* widget)
 {
-    connect(widget, SIGNAL(deleted(TrayNotificationWidget*)), this, SLOT(removeFirst(TrayNotificationWidget*)));
+	int zoom_app = qApp->primaryScreen()->logicalDotsPerInch() / 96.0;
+	zoom_app /= qApp->primaryScreen()->devicePixelRatio();
+
+	connect(widget, SIGNAL(deleted(TrayNotificationWidget*)), this, SLOT(removeFirst(TrayNotificationWidget*)));
     qDebug() << "Count: " + QVariant(notificationWidgets->count()).toString();
     if(notificationWidgets->count() < m_maxTrayNotificationWidgets)
     {
@@ -57,9 +63,9 @@ void TrayNotificationManager::append(TrayNotificationWidget* widget)
         if(notificationWidgets->count() > 0)
         {
             if(!m_up)
-                m_deltaY += -100;
+				m_deltaY += -100 * zoom_app;
             else
-                m_deltaY += 100;
+				m_deltaY += 100 * zoom_app;
         }
 
         if(notificationWidgets->count() == 0)
