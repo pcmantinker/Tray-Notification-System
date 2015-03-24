@@ -1,3 +1,5 @@
+#include <QScreen>
+
 #include "traynotificationwidget.h"
 
 TrayNotificationWidget::TrayNotificationWidget(QPixmap pixmapIcon, QString headerText, QString messageText) : QWidget(0)
@@ -22,21 +24,29 @@ TrayNotificationWidget::TrayNotificationWidget(QPixmap pixmapIcon, QString heade
     // create a display widget for displaying child widgets
     QWidget* displayWidget = new QWidget;
     displayWidget->setGeometry(0, 0, this->width(), this->height());
-    displayWidget->setStyleSheet(".QWidget { background-color: rgba(0, 0, 0, 75%); border-width: 1px; border-style: solid; border-radius: 10px; border-color: #555555; } .QWidget:hover { background-color: rgba(68, 68, 68, 75%); border-width: 2px; border-style: solid; border-radius: 10px; border-color: #ffffff; }");
+    displayWidget->setStyleSheet(".QWidget { background-color: rgba(0, 0, 0, 75%); "
+    "border-width: 1pt; border-style: solid; border-radius: 10pt; border-color: #555555; } "
+    ".QWidget:hover { background-color: rgba(68, 68, 68, 75%); border-width: 2pt; border-style: solid; border-radius: 10pt; border-color: #ffffff; }");
 
-    QLabel* icon = new QLabel;
+	int zoom_app = qApp->primaryScreen()->logicalDotsPerInch() / 96.0;
+	zoom_app /= devicePixelRatio();
+
+	QLabel* icon = new QLabel;
     icon->setPixmap(pixmapIcon);
-    icon->setMaximumSize(32, 32);
+	icon->setMaximumSize(32* zoom_app, 32* zoom_app);
     QLabel* header = new QLabel;
-    header->setMaximumSize(225, 50);
+
+
+
+	header->setMaximumSize(225 * zoom_app, 50 * zoom_app);
     header->setWordWrap(true);
     header->setText(headerText);
-    header->setStyleSheet("QLabel { color: #ffffff; font-weight: bold; font-size: 12px; }");
+    header->setStyleSheet("QLabel { color: #ffffff; font-weight: bold; font-size: 12pt; }");
     QLabel* message = new QLabel;
-    message->setMaximumSize(225, 100);
+	message->setMaximumSize(225* zoom_app, 100* zoom_app);
     message->setWordWrap(true);
     message->setText(messageText);
-    message->setStyleSheet("QLabel { color: #ffffff; font-size: 10px; }");
+    message->setStyleSheet("QLabel { color: #ffffff; font-size: 10pt; }");
     QHBoxLayout* displayMainLayout = new QHBoxLayout;
     displayMainLayout->addWidget(icon);
     QVBoxLayout* vl = new QVBoxLayout;
@@ -60,5 +70,6 @@ void TrayNotificationWidget::fadeOut()
 {
     emit deleted(this);
     this->hide();
+	this->deleteLater();
 }
 
